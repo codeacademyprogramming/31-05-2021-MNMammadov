@@ -1,7 +1,15 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 
-const WeatherCard = ({ dt, temp_min, temp_max, main, icon }) => {
+interface IProps {
+    dt: number;
+    temp_min: number;
+    temp_max: number;
+    weatherType: string;
+    icon: string;
+}
+
+const WeatherCard: React.FC<IProps> = ({ dt, temp_min, temp_max, weatherType, icon }) => {
     const date = new Date(dt);
 
     return (
@@ -11,13 +19,20 @@ const WeatherCard = ({ dt, temp_min, temp_max, main, icon }) => {
                 src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
             />
             <Card.Body>
-                <Card.Title>{main}</Card.Title>
+                <Card.Title>{weatherType}</Card.Title>
                 <p>
                     {date.toLocaleDateString()} - {date.toLocaleTimeString()}
                 </p>
                 <p>Min: {temp_min}</p>
                 <p>Max: {temp_max}</p>
             </Card.Body>
+            <button
+                type="submit"
+                // onClick={(evt) => deleteItem(city.name)}
+                className="bg-transparent"
+            >
+                Delete
+            </button>
         </Card>
     );
 };
